@@ -1,7 +1,6 @@
 import requests
 import pymysql
 
-# Conectar a MySQL
 try:
     conn = pymysql.connect(
         host='localhost',
@@ -9,22 +8,21 @@ try:
         password='barnach',
         database='tp2',
         charset='utf8mb4',
-        cursorclass=pymysql.cursors.DictCursor  # Devuelve los resultados como diccionarios
+        cursorclass=pymysql.cursors.DictCursor
     )
     print("✅ Conexión exitosa a MySQL")
 
     with conn.cursor() as cursor:
-        # Iterar desde 001 hasta 999
         for i in range(1, 1000):
-            code = str(i).zfill(3)  # Genera '001', '002', ... '999'
+            code = str(i).zfill(3)
             url = f"https://restcountries.com/v3.1/alpha/{code}"
 
             try:
-                response = requests.get(url, timeout=5)  # Tiempo de espera de 5 segundos
-                response.raise_for_status()  # Lanza una excepción si la respuesta no es 200
+                response = requests.get(url, timeout=5)
+                response.raise_for_status()
                 data = response.json()
 
-                if isinstance(data, list) and data:  # Verifica que data sea una lista y tenga contenido
+                if isinstance(data, list) and data:
                     pais = data[0]
 
                     codigoPais = int(code)
@@ -53,7 +51,7 @@ try:
 
             except requests.exceptions.RequestException as e:
                 print(f"⚠️ Error con código {code}: {e}")
-                continue  # Si hay un error con la API, continuar con el siguiente código
+                continue
 
 except pymysql.MySQLError as e:
     print(f"❌ Error al conectar a MySQL: {e}")
