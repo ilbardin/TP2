@@ -1,0 +1,3 @@
+1. Instalar Python 3.12
+2. Sobre el directorio del proyecto, ejecutar "pip install -r requirements.txt"
+3. Correr individualmente el script necesario con "py script.py"
