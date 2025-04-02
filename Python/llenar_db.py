@@ -1,12 +1,7 @@
 import requests
-from pymongo import MongoClient
+from conexion_db import get_database
 
-# Conexión a MongoDB
-print("Conectando a la base de datos MongoDB...")
-client = MongoClient('mongodb://localhost:27017/')
-db = client['paises_db']
-coleccion = db['paises']
-print("Conexión establecida correctamente.")
+coleccion = get_database()
 
 for i in range(1, 301):
     code = str(i)
