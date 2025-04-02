@@ -1,10 +1,7 @@
 from pymongo import MongoClient
+from conexion_db import get_database
 
-print("Conectando a la base de datos MongoDB...")
-client = MongoClient('mongodb://localhost:27017/')
-db = client['paises_db']
-coleccion = db['paises']
-print("Conexión establecida correctamente.")
+coleccion = get_database()
 
 
 # 6.1. Seleccionar documentos donde la región sea "Americas"
